@@ -33,5 +33,6 @@ npm install @vonage/server-sdk
 node server.js
 ```
 
-<img width="844" alt="image" src="https://github.com/dimoz29/sms_Nodejs/assets/123158855/90952a2a-1ecc-43c1-b35e-51a97dabd8ef">
+<img width="841" alt="Vonage SMS Sender" src="https://github.com/dimoz29/sms_Nodejs/assets/123158855/4b145cc6-f56a-4f6c-8fa2-ed22627ae296">
+
 
