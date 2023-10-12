@@ -27,5 +27,8 @@ npm install express
 ```
 npm install @vonage/server-sdk
 ```
-#create the server.js file with the right dependencies#
-#create the index.html file#
+#create the server.js file with the right dependencies and create the index.html file and run your .js script
+
+```
+node server.js
+```
