@@ -1,21 +1,31 @@
+#Node.JS
+#- **JavaScript Runtime**: Node.js is a platform that runs JavaScript on servers.
+#- **Asynchronous**: Handles many tasks at once without waiting.
+#- **Event-Driven**: Reacts to events like user actions.
+#- **Examples**: Web servers, chat applications, API services.
+#- **NPM**: Node Package Manager for managing libraries.
+
 #First step check if you have node.js installed
 ```
 node -v
 npm -v
 ```
 #If not
-
 ```
 brew install node
 ```
-
-#we need to compile, test, debug, and deploy our contracts.
-
-#First make sure you have node version 12 or above and npm installed. Then install Hardhat.
+#we need to create a folder to work
 ```
-node --version
-npm --version
+mkdir my-node-project
+cd my-node-project
+npm init
+````
 ```
-#If you don't have node you can find the installaiton guides for Windows, macOS, and Linux here:  https://nodejs.org/en/download/
-
+npm install express
 ```
+#Install the Vonage SDK Module: Make sure you have installed the Vonage SDK module in your project using the following command
+```
+npm install @vonage/server-sdk
+```
+#create the server.js file with the right dependencies
+#create the index.html file
