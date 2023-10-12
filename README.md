@@ -1,12 +1,12 @@
-#First step use of python and flask
+#First step check if you have node.js installed
 ```
-pip3 install vonage
-pip3 install flask
+node -v
+npm -v
+```
+#If not
 
-nano app.py
-mkdir templates
-cd templates
-nano index.html
+```
+brew install node
 ```
 
 #we need to compile, test, debug, and deploy our contracts.
