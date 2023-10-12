@@ -1,9 +1,9 @@
 #Node.JS
-#- **JavaScript Runtime**: Node.js is a platform that runs JavaScript on servers.
-#- **Asynchronous**: Handles many tasks at once without waiting.
-#- **Event-Driven**: Reacts to events like user actions.
-#- **Examples**: Web servers, chat applications, API services.
-#- **NPM**: Node Package Manager for managing libraries.
+- **JavaScript Runtime**: Node.js is a platform that runs JavaScript on servers.
+- **Asynchronous**: Handles many tasks at once without waiting.
+- **Event-Driven**: Reacts to events like user actions.
+- **Examples**: Web servers, chat applications, API services.
+- **NPM**: Node Package Manager for managing libraries.
 
 #First step check if you have node.js installed
 ```
