@@ -1,17 +1,32 @@
 // app.js
 
+// Function to connect to MetaMask
+async function connectMetaMask() {
+  if (window.ethereum) {
+      try {
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          console.log('Connected to MetaMask');
+      } catch (error) {
+          console.error('User denied account access to MetaMask');
+      }
+  } else {
+      alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
+  }
+}
+
 // Function to create and append elements
 function createElement(tag, attributes = {}, textContent = '') {
-    const element = document.createElement(tag);
-    for (const key in attributes) {
+  const element = document.createElement(tag);
+  for (const key in attributes) {
       element.setAttribute(key, attributes[key]);
-    }
-    element.textContent = textContent;
-    return element;
   }
-  
-  // Create the HTML structure
-  document.addEventListener('DOMContentLoaded', () => {
+  element.textContent = textContent;
+  return element;
+}
+
+// Create the HTML structure
+document.addEventListener('DOMContentLoaded', () => {
+  connectMetaMask(); // Connect to MetaMask
     // Head section
     const head = document.head;
     head.innerHTML = `
