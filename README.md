@@ -35,4 +35,6 @@ node server.js
 
 <img width="841" alt="Vonage SMS Sender" src="https://github.com/dimoz29/sms_Nodejs/assets/123158855/4b145cc6-f56a-4f6c-8fa2-ed22627ae296">
 
+<img width="677" alt="image" src="https://github.com/dimoz29/sms_Nodejs/assets/123158855/5ffb5b4b-d988-4e25-a907-adc4a16da1d1">
+
 
