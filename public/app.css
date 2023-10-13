@@ -1,0 +1,118 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #36d1dc, #5b86e5);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.logo-container,
+.eth-logo-container {
+    position: absolute;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.logo-container {
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.eth-logo-container {
+    top: 2vh;
+    right: 2vw;
+}
+
+.tdi-logo {
+    width: 15vw;
+    transition: width 0.1s ease;
+}
+
+.eth-logo {
+    width: 8vw;
+    transition: width 0.1s ease;
+}
+
+.container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 50vw;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    transition: all 0.1s ease;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+}
+
+label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+input[type="text"],
+textarea {
+    border: 2px solid #f0f0f0;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #5b86e5;
+    outline: none;
+}
+
+input[type="submit"] {
+    background-color: #5b86e5;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #36d1dc;
+}
+
+/* Media queries to optimize the display for smaller screens */
+@media (max-width: 768px) {
+    .tdi-logo {
+        width: 30vw;
+    }
+
+    .eth-logo {
+        width: 15vw;
+    }
+
+    .container {
+        width: 80vw;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+}

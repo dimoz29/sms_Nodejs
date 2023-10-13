@@ -10,6 +10,8 @@ const vonage = new Vonage({
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static('public'));
+
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
