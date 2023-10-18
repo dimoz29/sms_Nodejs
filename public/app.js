@@ -14,9 +14,9 @@ async function connectMetaMask() {
 
   // Check if MetaMask is already connected
   if (window.ethereum && window.ethereum.selectedAddress) {
-    // If already connected, display a "Connected" message and the MetaMask icon
+    // If already connected, display the "Connected" message and the MetaMask icon
     const connectedContainer = createElement('div', { id: 'connected-container' });
-    const connectedMessage = createElement('div', { id: 'connected-message' }, 'Connected to Wallet');
+    const connectedMessage = createElement('div', { id: 'connected-message' }, 'Connected');
     const metamaskIcon = createElement('img', {
       src: '/metamask-icon.png',
       alt: 'MetaMask Icon',
@@ -25,6 +25,7 @@ async function connectMetaMask() {
     connectedContainer.appendChild(connectedMessage);
     connectedContainer.appendChild(metamaskIcon);
     body.appendChild(connectedContainer);
+    localStorage.setItem('isMetaMaskConnected', 'true'); // Store the connection state
     return; // Stop further execution
   }
 
@@ -41,7 +42,7 @@ async function connectMetaMask() {
         // Replace the button with a "Connected" message and the MetaMask icon
         body.removeChild(connectButton);
         const connectedContainer = createElement('div', { id: 'connected-container' });
-        const connectedMessage = createElement('div', { id: 'connected-message' }, 'Connected to Wallet');
+        const connectedMessage = createElement('div', { id: 'connected-message' }, 'Connected');
         const metamaskIcon = createElement('img', {
           src: '/metamask-icon.png',
           alt: 'MetaMask Icon',
@@ -50,6 +51,7 @@ async function connectMetaMask() {
         connectedContainer.appendChild(connectedMessage);
         connectedContainer.appendChild(metamaskIcon);
         body.appendChild(connectedContainer);
+        localStorage.setItem('isMetaMaskConnected', 'true'); // Store the connection state
         // You can perform additional actions here after connecting
       } catch (error) {
         console.error('User denied account access to MetaMask');
@@ -58,13 +60,40 @@ async function connectMetaMask() {
       alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
     }
   });
+
+  // Check if MetaMask is locked (on page load)
+  const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+  if (accounts.length === 0) {
+    // If locked, clear the "Connected" message and MetaMask icon
+    body.removeChild(connectButton);
+    localStorage.removeItem('isMetaMaskConnected');
+  }
 }
 
 // Create the HTML structure
 document.addEventListener('DOMContentLoaded', () => {
-  // Connect to MetaMask
-  connectMetaMask();
-  // Rest of your code...
+  // Check if MetaMask is already connected (on page load)
+  const isMetaMaskConnected = localStorage.getItem('isMetaMaskConnected');
+  if (isMetaMaskConnected === 'true') {
+    // If already connected, display the "Connected" message and the MetaMask icon
+    const connectedContainer = createElement('div', { id: 'connected-container' });
+    const connectedMessage = createElement('div', { id: 'connected-message' }, 'Connected');
+    const metamaskIcon = createElement('img', {
+      src: '/metamask-icon.png',
+      alt: 'MetaMask Icon',
+      id: 'metamask-icon',
+    });
+    connectedContainer.appendChild(connectedMessage);
+    connectedContainer.appendChild(metamaskIcon);
+    document.body.appendChild(connectedContainer);
+  } else {
+    // Connect to MetaMask (if not already connected)
+    connectMetaMask();
+  }
+
+ 
+
+
 
   // Head section
   const head = document.head;

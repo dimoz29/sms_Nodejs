@@ -168,11 +168,11 @@ body::before {
   
   /* Style for the "MetaMask Icon" */
   #metamask-icon {
-    width: 24px; /* Adjust the icon width as needed */
+    width: 50px; /* Adjust the icon width as needed */
     margin-left: 25px; /* Add some spacing between the message and the icon */
     position: absolute;
-    top: 6%;
-    left: 86%
+    top: 4%;
+    left: 84%
   }
   
 
