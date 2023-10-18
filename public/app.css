@@ -39,7 +39,7 @@ body {
     background-color: rgba(0, 0, 0, 0.408);
     padding: 40px;
     border-radius: 10px;
-    box-shadow:  10px 8px 15px #e10075;
+    box-shadow: 10px 8px 15px #e10075;
     max-width: 500px;
     width: 80%;
     text-align: center;
@@ -106,9 +106,73 @@ input[type="submit"] {
     position: absolute;
     bottom: 15px; /* Adjust the distance from the bottom as needed */
     left: 15px; /* Adjust the distance from the left as needed */
-    
-    padding: 5x;
+
+    padding: 5px;
     border-radius: 15px;
 }
 
+/* Create a transparent layer with a background image */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('Helicopter.gif'); /* Set the background image URL */
+    background-size: cover; /* Scale the image to cover the entire layer */
+    background-repeat: no-repeat; /* Prevent image from repeating */
+    background-position: center center; /* Center the image */
+    opacity: 0.05; /* Adjust the opacity as needed */
+    z-index: -1; /* Place it behind all other content */
+}
+
+/* Add this CSS to your app.css file */
+
+/* Style for the "Connect to MetaMask" button */
+#connect-button {
+    background-color: #2c5364; /* Darker background color */
+    color: #fff; /* Text color */
+    padding: 10px 30px; /* Padding around text */
+    font-size: 18px; /* Font size */
+    border: none; /* Remove border */
+    border-radius: 15px; /* Rounded corners */
+    cursor: pointer; /* Cursor style on hover */
+    transition: background-color 0.3s ease; /* Smooth color transition on hover */
+    margin: 20px; /* Add some spacing around the button */
+    position: absolute; /* Position it as needed */
+    top: 5%; /* Adjust the vertical position as needed */
+    left: 80%;
+    transform: translateX(-50%);
+  }
+  
+  #connect-button:hover {
+    background-color: #e10075; /* Change color on hover to match the gradient */
+  }
+  
+  /* Style for the "Connected" message */
+  #connected-message {
+    background-color: #4caf50; /* Green background color */
+    color: white; /* White text color */
+    padding: 10px; /* Padding around the message */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    position: absolute; /* Position it as needed */
+    top: 5%; /* Adjust the vertical position as needed */
+    left: calc(80% + 15px); /* Position it next to the connect button */
+    transform: translateX(-50%);
+    z-index: 1000; /* Ensure it's above other elements */
+    transition: opacity 0.3s ease; /* Add a smooth fade-in effect */
+    opacity: 10; /* Initially set opacity to 0 (hidden) */
+  }
+  
+  /* Style for the "MetaMask Icon" */
+  #metamask-icon {
+    width: 24px; /* Adjust the icon width as needed */
+    margin-left: 25px; /* Add some spacing between the message and the icon */
+    position: absolute;
+    top: 6%;
+    left: 86%
+  }
+  
 
