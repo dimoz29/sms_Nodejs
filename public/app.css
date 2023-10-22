@@ -114,12 +114,12 @@ input[type="submit"] {
 /* Create a transparent layer with a background image */
 body::before {
     content: "";
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('Helicopter.gif'); /* Set the background image URL */
+    background-image: url('ConnecWallet.gif'); /* Set the background image URL */
     background-size: cover; /* Scale the image to cover the entire layer */
     background-repeat: no-repeat; /* Prevent image from repeating */
     background-position: center center; /* Center the image */
@@ -127,7 +127,7 @@ body::before {
     z-index: -1; /* Place it behind all other content */
 }
 
-/* Add this CSS to your app.css file */
+
 
 /* Style for the "Connect to MetaMask" button */
 #connect-button {
@@ -152,7 +152,7 @@ body::before {
   
   /* Style for the "Connected" message */
   #connected-message {
-    background-color: #4caf50; /* Green background color */
+    background-color: #14d03a8f; /* Green background color */
     color: white; /* White text color */
     padding: 10px; /* Padding around the message */
     border-radius: 5px; /* Rounded corners */
@@ -164,6 +164,7 @@ body::before {
     z-index: 1000; /* Ensure it's above other elements */
     transition: opacity 0.3s ease; /* Add a smooth fade-in effect */
     opacity: 10; /* Initially set opacity to 0 (hidden) */
+    box-shadow: 15px 10px 15px #0c0207; /* Add shadow */
   }
   
   /* Style for the "MetaMask Icon" */
@@ -171,8 +172,9 @@ body::before {
     width: 50px; /* Adjust the icon width as needed */
     margin-left: 25px; /* Add some spacing between the message and the icon */
     position: absolute;
+    border-radius: 10px; /* Rounded corners */
     top: 4%;
-    left: 84%
+    left: 84%;
+    opacity: 100%;
   }
   
-
