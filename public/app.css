@@ -176,8 +176,9 @@ body::before {
     margin-left: 25px; /* Add some spacing between the message and the icon */
     position: absolute;
     border-radius: 10px; /* Rounded corners */
-    top: 4%;
-    left: 84%;
-    opacity: 100%;
+    top: 2vh;
+    right: 10vw;
+    opacity: 80%;
+    box-shadow: 80px 0.5vw 2vw rgba(12, 2, 7, 0.5);
   }
   
