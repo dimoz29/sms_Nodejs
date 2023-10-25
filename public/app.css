@@ -119,7 +119,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('ConnecWallet.gif'); /* Set the background image URL */
+    background-image: url('ConnectWallet_optimized.gif'); /* Set the background image URL */
     background-size: cover; /* Scale the image to cover the entire layer */
     background-repeat: no-repeat; /* Prevent image from repeating */
     background-position: center center; /* Center the image */
