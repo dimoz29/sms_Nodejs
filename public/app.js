@@ -60,6 +60,13 @@ function createElement(tag, attributes = {}, textContent = '') {
       try {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
         checkMetaMaskStatus();
+        // Initialize Web3.js
+        const web3 = new Web3(window.ethereum);
+        // The ABI of the contract
+        const abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"fee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getUsers","outputs":[{"internalType":"address payable[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"recipient","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"sendPayment","outputs":[],"stateMutability":"payable","type":"function"}];
+        const contract = '0xB5364e95BAC807F262744Dedd87BBF5b70504855';
+        // Create a contract instance
+        const contract = new web3.eth.Contract(abi, contractAddress);
       } catch (error) {
         console.error('User denied account access to MetaMask');
       }
