@@ -208,15 +208,14 @@ form.onsubmit = async (event) => {
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
   const account = accounts[0];
 
-  try {
+  try { 
+    // Here you can call the contract method you want to interact with
+    // Replace sendPayment with your contract's method and arguments
+    await contract.methods.sendPayment().send({ from: accounts, value: web3.utils.toWei('0.01', 'ether') });
+    alert('Transaction Successful!');
     // Call getUsers method
     const users = await contract.methods.getUsers().call({ from: account });
     console.log(users); // Log the users for now, handle as needed
-      
-    // Here you can call the contract method you want to interact with
-    // Replace sendPayment with your contract's method and arguments
-    await contract.methods.sendPayment().send({ from: account, value: web3.utils.toWei('0.01', 'ether') });
-    alert('Transaction Successful!');
   } catch (error) {
     alert('Transaction Failed: ' + error.message);
   }
