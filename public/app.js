@@ -1,3 +1,9 @@
+// Initialize Web3.js
+const web3 = new Web3(window.ethereum);
+
+// Create a contract instance
+const contract = new web3.eth.Contract(abi, contractAddress);
+
 // Function to create and append elements
 function createElement(tag, attributes = {}, textContent = '') {
     const element = document.createElement(tag);
@@ -8,6 +14,10 @@ function createElement(tag, attributes = {}, textContent = '') {
     return element;
   }
   
+// The ABI of the contract
+const abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"fee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getUsers","outputs":[{"internalType":"address payable[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"recipient","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"sendPayment","outputs":[],"stateMutability":"payable","type":"function"}];
+const contract = '0xB5364e95BAC807F262744Dedd87BBF5b70504855';
+
   // Function to update MetaMask UI components
   function updateMetaMaskUI(isConnected) {
     const body = document.body;
@@ -54,29 +64,29 @@ function createElement(tag, attributes = {}, textContent = '') {
     }
   }
   
-  // Function to connect to MetaMask
-  async function connectMetaMask() {
-    if (window.ethereum) {
-      try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        checkMetaMaskStatus();
-        // Initialize Web3.js
-        const web3 = new Web3(window.ethereum);
-        // The ABI of the contract
-        const abi = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"fee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getUsers","outputs":[{"internalType":"address payable[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"recipient","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"sendPayment","outputs":[],"stateMutability":"payable","type":"function"}];
-        const contract = '0xB5364e95BAC807F262744Dedd87BBF5b70504855';
-        // Create a contract instance
-        const contract = new web3.eth.Contract(abi, contractAddress);
-      } catch (error) {
-        console.error('User denied account access to MetaMask');
+// Function to connect to MetaMask
+async function connectMetaMask() {
+  if (window.ethereum) {
+    try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      checkMetaMaskStatus();
+    } catch (error) {
+      if (error.code === 4001) { 
+        // User rejected request
+        console.error('User denied account access');
+      } else {
+        console.error(error);
       }
-  
-      // Using an interval to periodically check MetaMask's status
-      setInterval(checkMetaMaskStatus, 1000);
-    } else {
-      alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
     }
+
+    // Using an event to check MetaMask's status when account changes
+    window.ethereum.on('accountsChanged', function (accounts) {
+      checkMetaMaskStatus();
+    });
+  } else {
+    alert('MetaMask is not installed. Please consider installing it: https://metamask.io/download.html');
   }
+}
   
   // Execute when DOM is loaded
   document.addEventListener('DOMContentLoaded', async () => {
@@ -166,26 +176,43 @@ function createElement(tag, attributes = {}, textContent = '') {
     body.appendChild(container);
     body.appendChild(logoContainer);
     body.appendChild(aboutUs);
-  
-    // Create a new Web3 instance using MetaMask's injected web3
-    // const web3 = new Web3(window.ethereum);
 
-    // const CONTRACT_ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"fee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getUsers","outputs":[{"internalType":"address payable[]","name":"","type":"address[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"recipient","outputs":[{"internalType":"address payable","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"sendPayment","outputs":[],"stateMutability":"payable","type":"function"}];
-    // const CONTRACT_ADDRESS = '0xB5364e95BAC807F262744Dedd87BBF5b70504855';
-    // Replace CONTRACT_ABI and CONTRACT_ADDRESS with your contract's ABI and address
-    // const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
-  
+// Import the validator library
+const validator = require('validator');
 
 // Handle form submission
-const form2 = document.querySelector('form2');
+const form = document.querySelector('form');
 form.onsubmit = async (event) => {
   event.preventDefault();
+
+    // Get user inputs
+  const recipientNumber = document.querySelector('[name="recipient_number"]').value;
+  const messageText = document.querySelector('[name="message_text"]').value;
+
+  // Validate user inputs
+  if (!validator.isMobilePhone(recipientNumber)) {
+    alert('Invalid recipient number');
+    return;
+  }
+  if (validator.isEmpty(messageText)) {
+    alert('Message text cannot be empty');
+    return;
+  }
+
+  // Sanitize user inputs
+  const sanitizedRecipientNumber = validator.escape(recipientNumber);
+  const sanitizedMessageText = validator.escape(messageText);
+
 
   // Ensure MetaMask is connected
   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
   const account = accounts[0];
 
   try {
+    // Call getUsers method
+    const users = await contract.methods.getUsers().call({ from: account });
+    console.log(users); // Log the users for now, handle as needed
+      
     // Here you can call the contract method you want to interact with
     // Replace sendPayment with your contract's method and arguments
     await contract.methods.sendPayment().send({ from: account, value: web3.utils.toWei('0.01', 'ether') });
